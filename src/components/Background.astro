@@ -1,0 +1,45 @@
+---
+import { baseUrl } from '@/utils/functions';
+---
+
+<section class='container'>
+  <video
+    poster={baseUrl('/assets/preview.avif')}
+    class='video1'
+    src={baseUrl(`/assets/tierra.mp4`)}
+    muted
+    loop
+    autoplay
+  >
+  </video>
+  <video
+    poster={baseUrl('/assets/preview.avif')}
+    class='video2'
+    src={baseUrl(`/assets/fondo.mp4`)}
+    muted
+    loop
+    autoplay></video>
+</section>
+
+<style>
+  .container,
+  video {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+  }
+
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .video2 {
+    mix-blend-mode: screen;
+    filter: brightness(2);
+  }
+</style>

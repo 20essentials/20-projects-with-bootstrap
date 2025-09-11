@@ -1,0 +1,107 @@
+---
+import { baseUrl } from '@/utils/functions';
+const logo = baseUrl('/assets/bootstrap.svg');
+---
+
+<div class='scene'>
+  <div class='layeredText'>
+    <span>20 Projects With Bootstrap</span>
+    <div class='layers' aria-hidden='true'>
+      <div class='layer' style='--i: 1;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 2;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 3;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 4;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 5;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 6;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 7;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 8;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 9;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 10;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 11;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 12;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 13;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 14;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 15;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 16;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 17;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 18;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 19;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 20;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 21;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 22;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 23;'>20 Projects With Bootstrap</div>
+      <div class='layer' style='--i: 24;'>20 Projects With Bootstrap</div>
+    </div>
+  </div>
+
+   <img src={logo} alt='Logo' class="am-logo" />
+</div>
+
+<style>
+  .am-logo {
+    position: absolute;
+    bottom: -8.5vmax;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6vmax;
+  }
+
+  .scene {
+    perspective: 400px;
+    animation: delete 1s ease-in-out both;
+    animation-delay: 4s;
+
+    * {
+      transform-style: preserve-3d;
+      font-size: 4vmax;
+
+      @media (width <= 1111px) and (orientation: portrait) {
+        font-size: 2.6vmax;
+      }
+    }
+  }
+
+  .layeredText {
+    --layers-count: 24;
+    --layer-offset: 0.13vmax;
+
+    position: relative;
+    font-family: Montserrat, sans-serif;
+    font-weight: 900;
+
+    span {
+      color: black;
+
+      text-shadow: 0 0 0.1vmax #003;
+    }
+
+    .layers,
+    .layer {
+      position: absolute;
+      inset: 0;
+    }
+
+    .layer {
+      --n: calc(var(--i) / var(--layers-count));
+      color: hsl(280 80% calc(var(--n) * 60%));
+      animation: rotating 3s infinite ease-in-out alternate;
+    }
+  }
+
+  @keyframes rotating {
+    from {
+      transform: translateZ(calc(var(--i) * var(--layer-offset)))
+        rotateZ(calc(var(--n) * 15deg));
+    }
+    to {
+      transform: translateZ(calc(var(--i) * var(--layer-offset)))
+        rotateZ(calc(var(--n) * -15deg));
+    }
+  }
+
+  @keyframes delete {
+    to {
+      opacity: 0;
+    }
+  }
+</style>

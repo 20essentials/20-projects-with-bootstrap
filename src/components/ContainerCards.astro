@@ -1,0 +1,319 @@
+---
+import { baseUrl } from '@/utils/functions';
+
+const arrayCards = [
+  {
+    title: 'Zoom',
+    repo: 'https://github.com/20essentials/project-000-720',
+    localImage: '/assets/n720.avif',
+    id: '001'
+  },
+  {
+    title: 'Email Validation',
+    repo: 'https://github.com/20essentials/project-000-646',
+    localImage: '/assets/n646.avif',
+    id: '002'
+  },
+  {
+    title: 'Center Slash',
+    repo: 'https://github.com/20essentials/project-000-654',
+    localImage: '/assets/n654.avif',
+    id: '003'
+  },
+  {
+    title: 'User',
+    repo: 'https://github.com/20essentials/project-000-660',
+    localImage: '/assets/n660.avif',
+    id: '004'
+  },
+  {
+    title: 'Moments',
+    repo: 'https://github.com/20essentials/project-000-621',
+    localImage: '/assets/n621.avif',
+    id: '005'
+  },
+  {
+    title: 'Vercel Glowing',
+    repo: 'https://github.com/20essentials/project-000-634',
+    localImage: '/assets/n634.avif',
+    id: '006'
+  },
+  {
+    title: 'Loader Ambient',
+    repo: 'https://github.com/20essentials/project-000-640',
+    localImage: '/assets/n640.avif',
+    id: '007'
+  },
+  {
+    title: 'Squishi',
+    repo: 'https://github.com/20essentials/project-000-669',
+    localImage: '/assets/n669.avif',
+    id: '008'
+  },
+  {
+    title: 'Trufas',
+    repo: 'https://github.com/20essentials/project-000-627',
+    localImage: '/assets/n627.avif',
+    id: '009'
+  },
+  {
+    title: 'Loader',
+    repo: 'https://github.com/20essentials/project-000-680',
+    localImage: '/assets/n680.avif',
+    id: '010'
+  },
+  {
+    title: 'Scale Image',
+    repo: 'https://github.com/20essentials/project-000-694',
+    localImage: '/assets/n694.avif',
+    id: '011'
+  },
+  {
+    title: 'Obs',
+    repo: 'https://github.com/20essentials/project-000-701',
+    localImage: '/assets/n701.avif',
+    id: '012'
+  },
+  {
+    title: 'Background Tit',
+    repo: 'https://github.com/20essentials/project-000-709',
+    localImage: '/assets/n709.avif',
+    id: '013'
+  },
+  {
+    title: 'Quer',
+    repo: 'https://github.com/20essentials/project-000-727',
+    localImage: '/assets/n727.avif',
+    id: '014'
+  },
+  {
+    title: 'Tit',
+    repo: 'https://github.com/20essentials/project-000-733',
+    localImage: '/assets/n733.avif',
+    id: '015'
+  },
+  {
+    title: 'Jug',
+    repo: 'https://github.com/20essentials/project-000-739',
+    localImage: '/assets/n739.avif',
+    id: '016'
+  },
+  {
+    title: 'SuperCheese',
+    repo: 'https://github.com/20essentials/project-000-744',
+    localImage: '/assets/n744.avif',
+    id: '017'
+  },
+  {
+    title: 'Background vip',
+    repo: 'https://github.com/20essentials/project-000-757',
+    localImage: '/assets/n757.avif',
+    id: '018'
+  },
+  {
+    title: 'Volve',
+    repo: 'https://github.com/20essentials/project-000-763',
+    localImage: '/assets/n763.avif',
+    id: '019'
+  },
+  {
+    title: 'toTop',
+    repo: 'https://github.com/20essentials/project-000-769',
+    localImage: '/assets/n769.avif',
+    id: '020'
+  }
+];
+
+const NUM_OF_CARDS = 50;
+const arrayOf50 = Array.from({ length: NUM_OF_CARDS }, (_, i) => {
+  const nextIndex = i % arrayCards.length;
+  return arrayCards[nextIndex];
+});
+---
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('li a');
+  for (const link of links) {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      (link.parentElement as HTMLElement).scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    });
+  }
+</script>
+
+<section class='am-container-cards'>
+  <aside>
+    <nav>
+      <ul>
+        {
+          arrayOf50.map(({ id, localImage, repo, title }, i) => {
+            const nameClass = `img-${i + 1}`;
+            return (
+              <li id={nameClass}>
+                <a href={`#${nameClass}`}>
+                  <>
+                    <img draggable="false" src={baseUrl(localImage)} alt={title} title={title} />
+                  </>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+  </aside>
+  <main>
+    {
+      arrayOf50.map(({ id, localImage, repo, title }, i) => {
+        return <a href={repo} class="am-conti">
+          <img draggable="false" src={baseUrl(localImage)} alt={title} title={title} />
+        </a>
+      })
+    }
+  </main>
+</section>
+
+<style>
+  .am-conti {
+    margin-left: 5vmax;
+ 
+
+    img {
+      width: 100%;
+      height: 100%;
+         border: 0.2vmax solid black;
+    }
+  }
+
+
+  @keyframes show {
+    from {
+      clip-path: circle(0px at 50% 50%);
+    }
+    to {
+      clip-path: circle(200vmax at 50% 50%);
+    }
+  }
+
+  .am-container-cards {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    min-height: 100vh;
+    animation: show 1s ease-in-out both;
+    animation-delay: 4s;
+  }
+
+  :root {
+    --count: 50;
+    --snap-size: 3.13vmax;
+    --offset: 2;
+  }
+
+  main {
+    padding-right: calc(var(--snap-size) * 5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    height: calc(100vh * var(--count));
+    grid-template-rows: repeat(var(--count), 1fr);
+    place-items: center;
+    animation: img-reel both steps(calc(var(--count) - 1));
+    animation-timeline: scroll(root);
+    
+  }
+
+  @keyframes img-reel {
+    to {
+      translate: 0 calc(-100% + 100vh);
+    }
+  }
+
+  aside {
+    width: var(--snap-size);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+  }
+
+  aside ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    position: relative;
+    right: 1.2vmax;
+    align-items: flex-start;
+    transform-style: preserve-3d;
+  }
+
+  @property --active {
+    initial-value: 0;
+    inherits: true;
+    syntax: '<number>';
+  }
+
+  li {
+    scroll-snap-align: center;
+    container-type: size;
+    flex: 1 1 var(--snap-size);
+    pointer-events: none;
+    aspect-ratio: 1;
+    filter: saturate(0.2);
+    animation: scale-l both linear;
+    animation-timeline: view();
+    animation-range: cover calc(-60% - (var(--snap-size) * var(--offset))) cover
+      calc(50% + (var(--snap-size) * var(--offset)));
+  }
+
+  @keyframes scale-l {
+    50% {
+      translate: -120% 0;
+      scale: 2;
+      transform: translate3d(0, 0, 20px);
+      filter: saturate(1);
+      z-index: 1000;
+    }
+  }
+
+  li img {
+    height: 100%;
+    width: 100%;
+    border-radius: 0.39vmax;
+  }
+
+  li a {
+    min-width: 100cqw;
+    min-height: 100cqh;
+    max-width: 39.06vmax;
+    max-height: 39.06vmax;
+    border: 0.26vmax solid transparent;
+    border-radius: 0.78vmax;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform-origin: 100% 50%;
+    translate: calc((var(--active) * (var(--snap-size) + 1rem)) * -1) -50%;
+    width: calc((var(--active) * (100vw - (var(--snap-size) + 3rem))));
+    height: calc((var(--active) * (100vw - (var(--snap-size) + 3rem))));
+    aspect-ratio: 1;
+    z-index: calc(1 + (var(--active) * 999));
+  }
+
+  img {
+    width: 90%;
+    object-fit: cover;
+  }
+</style>
