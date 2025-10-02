@@ -1,4 +1,5 @@
 ---
+import Loader from './Loader.astro';
 import { baseUrl } from '@/utils/functions';
 
 const arrayCards = [
@@ -132,6 +133,8 @@ const arrayOf50 = Array.from({ length: NUM_OF_CARDS }, (_, i) => {
 ---
 
 <script>
+  import { $ } from '@/utils/functions';
+
   const links = document.querySelectorAll<HTMLAnchorElement>('li a');
   for (const link of links) {
     link.addEventListener('click', event => {
@@ -142,9 +145,16 @@ const arrayOf50 = Array.from({ length: NUM_OF_CARDS }, (_, i) => {
       });
     });
   }
+
+  setTimeout(() => {
+    $('.am-container-cards')?.classList.remove('escondido');
+    $('.pl')?.classList.add('escondido');
+  }, 4000);
 </script>
 
-<section class='am-container-cards'>
+<section class='am-container-cards escondido'>
+  <Loader />
+
   <aside>
     <nav>
       <ul>
@@ -155,7 +165,12 @@ const arrayOf50 = Array.from({ length: NUM_OF_CARDS }, (_, i) => {
               <li id={nameClass}>
                 <a href={`#${nameClass}`}>
                   <>
-                    <img draggable="false" src={baseUrl(localImage)} alt={title} title={title} />
+                    <img
+                      draggable='false'
+                      src={baseUrl(localImage)}
+                      alt={title}
+                      title={title}
+                    />
                   </>
                 </a>
               </li>
@@ -168,9 +183,16 @@ const arrayOf50 = Array.from({ length: NUM_OF_CARDS }, (_, i) => {
   <main>
     {
       arrayOf50.map(({ id, localImage, repo, title }, i) => {
-        return <a href={repo} class="am-conti">
-          <img draggable="false" src={baseUrl(localImage)} alt={title} title={title} />
-        </a>
+        return (
+          <a href={repo} class='am-conti'>
+            <img
+              draggable='false'
+              src={baseUrl(localImage)}
+              alt={title}
+              title={title}
+            />
+          </a>
+        );
       })
     }
   </main>
@@ -179,22 +201,11 @@ const arrayOf50 = Array.from({ length: NUM_OF_CARDS }, (_, i) => {
 <style>
   .am-conti {
     margin-left: 5vmax;
- 
 
     img {
       width: 100%;
       height: 100%;
-         border: 0.2vmax solid black;
-    }
-  }
-
-
-  @keyframes show {
-    from {
-      clip-path: circle(0px at 50% 50%);
-    }
-    to {
-      clip-path: circle(200vmax at 50% 50%);
+      border: 0.2vmax solid black;
     }
   }
 
@@ -204,8 +215,12 @@ const arrayOf50 = Array.from({ length: NUM_OF_CARDS }, (_, i) => {
     display: flex;
     justify-content: flex-end;
     min-height: 100vh;
-    animation: show 1s ease-in-out both;
-    animation-delay: 4s;
+
+    &.escondido {
+      *:not(.pl, .pl__dot, .pl__text) {
+        opacity: 0 !important;
+      }
+    }
   }
 
   :root {
@@ -226,7 +241,6 @@ const arrayOf50 = Array.from({ length: NUM_OF_CARDS }, (_, i) => {
     place-items: center;
     animation: img-reel both steps(calc(var(--count) - 1));
     animation-timeline: scroll(root);
-    
   }
 
   @keyframes img-reel {
