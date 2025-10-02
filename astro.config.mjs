@@ -10,10 +10,6 @@ export default defineConfig({
   //Localhost
   // site: 'http://localhost:4321/'
 
-  //Deploy normal project
-  // base: '/project-1020/',
-  // site: 'https://20essentials.github.io/project-1020/'
-
   //Deploy 20 Projects
   base: '/20-projects-with-bootstrap/',
   site: 'https://20essentials.github.io/20-projects-with-bootstrap/',
